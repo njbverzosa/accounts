@@ -6,7 +6,7 @@
 // In production, this would be on a server
 const ACCOUNTS = {
     'admin': {
-        passwordHash: btoa('nj@2024'), // Base64 encoded
+        passwordHash: btoa('nj@2024'), // Base64 encoded - FIXED
         displayName: 'Administrator'
     }
     // ,
@@ -119,6 +119,9 @@ function handleLogin(e) {
     
     // Verify password (Base64 comparison)
     const hashedInput = btoa(password);
+    console.log('Input hash:', hashedInput);
+    console.log('Stored hash:', ACCOUNTS[username].passwordHash);
+    
     if (hashedInput !== ACCOUNTS[username].passwordHash) {
         loginAttempts++;
         handleFailedAttempt();
@@ -183,11 +186,13 @@ function confirmLogin() {
     // Complete login
     const username = currentUser;
     const displayName = ACCOUNTS[username].displayName;
+    const password = document.getElementById('password').value;
     
     // Store session
     sessionStorage.setItem('loggedIn', 'true');
     sessionStorage.setItem('username', username);
     sessionStorage.setItem('displayName', displayName);
+    sessionStorage.setItem('actualPassword', password);
     sessionStorage.setItem('loginTime', new Date().toLocaleString());
     
     // Close modal
@@ -281,9 +286,9 @@ document.addEventListener('keydown', function(e) {
 
 function toggleAccountPassword(elementId) {
     const passwordEl = document.getElementById(elementId);
-    const toggleBtn = passwordEl.parentElement.querySelector('.password-toggle');
-    
     if (!passwordEl) return;
+    
+    const toggleBtn = passwordEl.parentElement.querySelector('.password-toggle');
     
     // Get the actual password from the element's text content
     const currentText = passwordEl.textContent;
@@ -319,10 +324,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordElements = document.querySelectorAll('.password-value');
     passwordElements.forEach(el => {
         const actualPassword = el.textContent;
-        el.dataset.password = actualPassword;
-        // Only hide if it's not already hidden
-        if (!el.classList.contains('visible')) {
-            el.textContent = '••••••••';
+        if (actualPassword && actualPassword !== '••••••••') {
+            el.dataset.password = actualPassword;
+            // Only hide if it's not already hidden
+            if (!el.classList.contains('visible')) {
+                el.textContent = '••••••••';
+            }
         }
     });
 });

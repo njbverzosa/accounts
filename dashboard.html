@@ -20,39 +20,58 @@
         <!-- Account Cards Grid -->
         <div class="accounts-section">
             <div class="section-header">
-                <h2>Account Holders</h2>
+                <h2>👤 Account Holders</h2>
+                <span class="section-badge">2 Users</span>
             </div>
             
             <div class="accounts-grid">
-                 <div class="account-card">
+                <!-- Account 1: Admin -->
+                <div class="account-card admin-card">
+                    <div class="account-header">
+                        <div class="account-avatar">👑</div>
+                        <div class="account-badge">Admin</div>
+                    </div>
                     <div class="account-body">
                         <div class="account-field">
-                            <span class="field-label">Username</span>
+                            <span class="field-label">👤 Username</span>
                             <span class="field-value" id="acc1Username">admin</span>
                         </div>
                         <div class="account-field password-field">
-                            <span class="field-label">Password</span>
+                            <span class="field-label">🔑 Password</span>
                             <div class="password-wrapper">
-                                <span class="field-value password-value" id="1">nj@2024</span>
-                                <button class="password-toggle" onclick="toggleAccountPassword('1')">👁️</button>
+                                <span class="field-value password-value" id="acc1Password">nj@2024</span>
+                                <button class="password-toggle" onclick="toggleAccountPassword('acc1Password')">👁️</button>
                             </div>
                         </div>
                     </div>
+                    <div class="account-footer">
+                        <span class="account-status online">🟢 Online</span>
+                        <span class="account-role">Administrator</span>
+                    </div>
                 </div>
 
+                <!-- Account 2: Demo -->
                 <div class="account-card">
+                    <div class="account-header">
+                        <div class="account-avatar">👤</div>
+                        <div class="account-badge user-badge">User</div>
+                    </div>
                     <div class="account-body">
                         <div class="account-field">
-                            <span class="field-label">Username</span>
-                            <span class="field-value" id="acc2Username"></span>
+                            <span class="field-label">👤 Username</span>
+                            <span class="field-value" id="acc2Username">demo_user</span>
                         </div>
                         <div class="account-field password-field">
-                            <span class="field-label">Password</span>
+                            <span class="field-label">🔑 Password</span>
                             <div class="password-wrapper">
-                                <span class="field-value password-value" id="2">jbfqojfb</span>
-                                <button class="password-toggle" onclick="toggleAccountPassword('2')">👁️</button>
+                                <span class="field-value password-value" id="acc2Password">demo123</span>
+                                <button class="password-toggle" onclick="toggleAccountPassword('acc2Password')">👁️</button>
                             </div>
                         </div>
+                    </div>
+                    <div class="account-footer">
+                        <span class="account-status offline">🔴 Offline</span>
+                        <span class="account-role">Staff</span>
                     </div>
                 </div>
             </div>

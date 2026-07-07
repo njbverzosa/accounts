@@ -1,54 +1,721 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Secure Login</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    /* ============================================
+   MODERN LOGIN PAGE DESIGN
+   ============================================ */
+
+    /* Import Google Fonts */
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0f0f1a;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    /* ============================================
+   ANIMATED BACKGROUND
+   ============================================ */
+
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .bg-circle.c1 {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      top: -200px;
+      right: -200px;
+      animation-delay: 0s;
+    }
+
+    .bg-circle.c2 {
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      bottom: -150px;
+      left: -150px;
+      animation-delay: -5s;
+    }
+
+    .bg-circle.c3 {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -10s;
+      opacity: 0.15;
+    }
+
+    .bg-circle.c4 {
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+      bottom: 10%;
+      right: 10%;
+      animation-delay: -15s;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(30px, -30px) scale(1.05);
+      }
+      50% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+      75% {
+        transform: translate(20px, -20px) scale(1.02);
+      }
+    }
+
+    /* ============================================
+   LOGIN CONTAINER
+   ============================================ */
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ============================================
+   LOGIN CARD
+   ============================================ */
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 48px 40px 40px;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* Brand Logo */
+    .brand-logo {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 24px;
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+    }
+
+    .login-card h2 {
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    /* ============================================
+   FORM INPUTS
+   ============================================ */
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .input-group label span {
+      font-size: 14px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 15px;
+      font-family: "Inter", sans-serif;
+      transition: all 0.3s;
+      outline: none;
+    }
+
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    .input-group input:focus {
+      border-color: #667eea;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+
+    .input-group input:focus + .input-icon {
+      opacity: 1;
+      color: #667eea;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+
+    /* Password Wrapper */
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 48px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      font-size: 18px;
+      padding: 8px;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .toggle-password:hover {
+      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ============================================
+   FORM OPTIONS
+   ============================================ */
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 24px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .remember-me input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #667eea;
+      cursor: pointer;
+    }
+
+    .forgot-password {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .forgot-password:hover {
+      color: #667eea;
+    }
+
+    /* ============================================
+   LOGIN BUTTON
+   ============================================ */
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    .login-btn:hover::before {
+      left: 100%;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .btn-icon {
+      transition: transform 0.3s;
+    }
+
+    .login-btn:hover .btn-icon {
+      transform: translateX(4px);
+    }
+
+    /* ============================================
+   ERROR MESSAGE
+   ============================================ */
+
+    .error-message {
+      color: #f5576c;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 16px;
+      min-height: 22px;
+      font-weight: 500;
+    }
+
+    /* ============================================
+   LOGIN FOOTER
+   ============================================ */
+
+    .login-footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .login-footer p {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+    }
+
+    .demo-hint {
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px 12px;
+      border-radius: 4px;
+    }
+
+    /* ============================================
+   CONFIRMATION MODAL
+   ============================================ */
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-box {
+      background: #1a1a2e;
+      padding: 40px;
+      border-radius: 24px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      animation: modalSlideUp 0.4s ease-out;
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-icon {
+      font-size: 56px;
+      margin-bottom: 16px;
+    }
+
+    .modal-box h3 {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .modal-box > p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .modal-details {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-user {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .modal-user-icon {
+      font-size: 28px;
+      width: 44px;
+      height: 44px;
+      background: rgba(102, 126, 234, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-label {
+      display: block;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .modal-username {
+      display: block;
+      font-size: 18px;
+      color: #ffffff;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .modal-buttons button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "Inter", sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .cancel-btn {
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .cancel-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    .confirm-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .confirm-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    /* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 32px 24px 28px;
+        border-radius: 18px;
+      }
+
+      .brand-logo {
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
+        border-radius: 16px;
+      }
+
+      .login-card h2 {
+        font-size: 24px;
+      }
+
+      .form-options {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .modal-box {
+        padding: 28px 20px;
+      }
+
+      .modal-buttons {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .login-card {
+        padding: 24px 16px 20px;
+      }
+
+      .brand-logo {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+      }
+
+      .login-card h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+  <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+      <div class="bg-circle c1"></div>
+      <div class="bg-circle c2"></div>
+      <div class="bg-circle c3"></div>
+      <div class="bg-circle c4"></div>
+    </div>
+
     <div class="login-container">
-        <div class="login-card">
-            <h2>🔐 Account Access</h2>
-            <p class="subtitle">Enter your credentials to continue</p>
-            
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" placeholder="Enter username" required>
-                </div>
-                
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="password" placeholder="Enter password" required>
-                        <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
-                    </div>
-                </div>
-                
-                <button type="submit" class="login-btn">Login</button>
-            </form>
-            
-            <p class="error-message" id="errorMessage"></p>
+      <div class="login-card">
+        <!-- Logo/Brand -->
+        <div class="brand-logo">
+          <span>🔐</span>
         </div>
+
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Enter your credentials to access your account</p>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="username"> <span>👤</span> Username </label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+              required
+              autocomplete="username"
+            />
+            <div class="input-icon">👤</div>
+          </div>
+
+          <div class="input-group">
+            <label for="password"> <span>🔑</span> Password </label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="toggle-password"
+                onclick="togglePassword()"
+              >
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="remember-me">
+              <input type="checkbox" id="rememberMe" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">
+            <span>Sign In</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="currentColor"
+                d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"
+              />
+            </svg>
+          </button>
+        </form>
+
+        <p class="error-message" id="errorMessage"></p>
+
+        <div class="login-footer">
+          <p>Demo accounts: <span class="demo-hint">admin / nj@2024</span></p>
+        </div>
+      </div>
     </div>
 
     <!-- Confirmation Popup -->
     <div class="modal-overlay" id="confirmationModal">
-        <div class="modal-box">
-            <div class="modal-icon">⚠️</div>
-            <h3>Confirm Login</h3>
-            <p>Are you sure you want to log in with this account?</p>
-            <div class="modal-details">
-                <p><strong>Username:</strong> <span id="confirmUsername"></span></p>
+      <div class="modal-box">
+        <div class="modal-icon">⚠️</div>
+        <h3>Confirm Login</h3>
+        <p>Are you sure you want to log in with this account?</p>
+        <div class="modal-details">
+          <div class="modal-user">
+            <span class="modal-user-icon">👤</span>
+            <div>
+              <span class="modal-label">Username</span>
+              <span class="modal-username" id="confirmUsername">admin</span>
             </div>
-            <div class="modal-buttons">
-                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button class="confirm-btn" onclick="confirmLogin()">Yes, Login</button>
-            </div>
+          </div>
         </div>
+        <div class="modal-buttons">
+          <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+          <button class="confirm-btn" onclick="confirmLogin()">
+            Yes, Login
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="auth.js"></script>
-</body>
+  </body>
 </html>
