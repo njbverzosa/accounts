@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h2>🔐 Account Access</h2>
+            <p class="subtitle">Enter your credentials to continue</p>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" placeholder="Enter password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+    </div>
+
+    <!-- Confirmation Popup -->
+    <div class="modal-overlay" id="confirmationModal">
+        <div class="modal-box">
+            <div class="modal-icon">⚠️</div>
+            <h3>Confirm Login</h3>
+            <p>Are you sure you want to log in with this account?</p>
+            <div class="modal-details">
+                <p><strong>Username:</strong> <span id="confirmUsername"></span></p>
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="confirm-btn" onclick="confirmLogin()">Yes, Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

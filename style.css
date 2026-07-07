@@ -1,0 +1,390 @@
+/* ============================================
+   MODERN DASHBOARD CSS
+   ============================================ */
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 24px 32px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+}
+
+.header-left h1 {
+    font-size: 28px;
+    color: #1a1a2e;
+    font-weight: 700;
+}
+
+.header-left p {
+    color: #666;
+    font-size: 15px;
+    margin-top: 4px;
+}
+
+.header-left p span {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+}
+
+/* ============================================
+   STATS GRID
+   ============================================ */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px 24px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-icon {
+    font-size: 32px;
+    width: 56px;
+    height: 56px;
+    background: #f0f4ff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #999;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+/* ============================================
+   ACCOUNTS SECTION
+   ============================================ */
+
+.accounts-section {
+    background: white;
+    padding: 28px 32px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 22px;
+    color: #1a1a2e;
+}
+
+.section-badge {
+    background: #667eea;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ============================================
+   ACCOUNT CARDS GRID
+   ============================================ */
+
+.accounts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.account-card {
+    background: #f8f9fc;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s;
+}
+
+.account-card:hover {
+    border-color: #667eea;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.15);
+}
+
+.account-card.admin-card {
+    border-color: #f39c12;
+    background: linear-gradient(135deg, #fffbf0, #f8f9fc);
+}
+
+.account-card.admin-card:hover {
+    border-color: #e67e22;
+    box-shadow: 0 12px 40px rgba(243, 156, 18, 0.2);
+}
+
+/* Account Header */
+.account-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.account-avatar {
+    font-size: 36px;
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.account-badge {
+    background: #667eea;
+    color: white;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-card .account-badge {
+    background: #f39c12;
+}
+
+.user-badge {
+    background: #6c757d;
+}
+
+/* Account Body */
+.account-body {
+    padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.account-field {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.field-label {
+    font-size: 11px;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.field-value {
+    font-size: 16px;
+    color: #1a1a2e;
+    font-weight: 600;
+    padding: 6px 12px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+/* Password Field */
+.password-field .password-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.password-field .field-value {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+.password-toggle {
+    background: #667eea;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.password-toggle:hover {
+    background: #5a6fd6;
+    transform: scale(1.05);
+}
+
+.password-toggle.showing {
+    background: #e74c3c;
+}
+
+.password-toggle.showing:hover {
+    background: #c0392b;
+}
+
+/* Password shown state */
+.password-value.visible {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0px;
+}
+
+/* Account Footer */
+.account-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.account-status {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.account-status.online {
+    color: #27ae60;
+}
+
+.account-status.offline {
+    color: #e74c3c;
+}
+
+.account-role {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .accounts-section {
+        padding: 20px;
+    }
+
+    .accounts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-left h1 {
+        font-size: 22px;
+    }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .account-card {
+        border-radius: 12px;
+    }
+}

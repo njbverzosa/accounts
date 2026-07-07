@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <div class="header-left">
+                <h1>📊 Dashboard</h1>
+                <p>Welcome back, <span id="displayUsername"></span>!</p>
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        </div>
+
+        <!-- Account Cards Grid -->
+        <div class="accounts-section">
+            <div class="section-header">
+                <h2>Account Holders</h2>
+            </div>
+            
+            <div class="accounts-grid">
+                 <div class="account-card">
+                    <div class="account-body">
+                        <div class="account-field">
+                            <span class="field-label">Username</span>
+                            <span class="field-value" id="acc1Username">admin</span>
+                        </div>
+                        <div class="account-field password-field">
+                            <span class="field-label">Password</span>
+                            <div class="password-wrapper">
+                                <span class="field-value password-value" id="1">nj@2024</span>
+                                <button class="password-toggle" onclick="toggleAccountPassword('1')">👁️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="account-card">
+                    <div class="account-body">
+                        <div class="account-field">
+                            <span class="field-label">Username</span>
+                            <span class="field-value" id="acc2Username"></span>
+                        </div>
+                        <div class="account-field password-field">
+                            <span class="field-label">Password</span>
+                            <div class="password-wrapper">
+                                <span class="field-value password-value" id="2">jbfqojfb</span>
+                                <button class="password-toggle" onclick="toggleAccountPassword('2')">👁️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
